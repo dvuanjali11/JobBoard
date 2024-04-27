@@ -11,31 +11,17 @@ document.querySelectorAll('input[type="number"]').forEach(inputNumber => {
     };
 });
 const registerForm = document.getElementById('register-form');
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      console.log("Name:", name);
+      console.log("Email:", email);
+    });
+  });
+  
+  
 
-registerForm.addEventListener('submit', (e) => {
-    e.preventDefault();
 
-    const formData = new FormData(registerForm);
-    const username = formData.get('username');
-    const email = formData.get('email');
-    const password = formData.get('password');
-
-    fetch('/register', {
-        method: 'POST',
-        body: JSON.stringify({ username, email, password }),
-        headers: { 'Content-Type': 'application/json' }
-    })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                throw new Error('Failed to register user');
-            }
-        })
-        .then((data) => {
-            console.log(data.message);
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-});
+   
